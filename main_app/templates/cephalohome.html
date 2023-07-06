@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% comment %} for head title tags and helping SEO {% endcomment %}
+{% block title %}Cephalopods{% endblock %}
+
+{% block content %}
+<h1 class="title pt-5">{{header}}</h1>
+<form class="mb-5" method="get">
+    <div class="field has-addons">
+        <div class="control">
+            <input class="input" type="text" name="name" placeholder="Cephalopod Name" />
+        </div>
+        <div class="control">
+            <input class="button is-success" type="submit" value="Search" />
+        </div>
+    </div>
+    <a class="button is-dark" href="{% url 'cephalohome' %}">Clear Search</a>
+    <a class="button is-dark" href="{% url 'create_cephalopod' %}">Add Animal</a>
+</form>
+<div class="gallery">
+    {% for cephalopod in cephalopods %}
+    <a href="{% url 'cephalopod_detail' cephalopod.pk %}">
+        <div class="card">
+            <div class="card-image">
+                <figure class="image is-square">
+                    <img src="{{cephalopod.image}}" alt="{{cephalopod.name}}"/>
+                </figure>
+            </div>
+            <div class="card-header">
+                <p class="card-header-title">{{cephalopod.name}}</p>
+            </div>
+        </div>
+    </a>
+    <!-- if there are no items in the cephalopods array then this will execute -->
+    {% empty %}
+    <article class="message">
+        <div class="message-header">
+            <p>No Cephalopods! :(</p>
+        </div>
+    </article>
+    <!-- rememeber you always need to explicitly close your for loops -->
+    {% endfor %}
+</div>
+{% endblock %}

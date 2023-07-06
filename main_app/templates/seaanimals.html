@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% comment %} for head title tags and helping SEO {% endcomment %}
+{% block title %}Sea Animals!{% endblock %}
+
+{% block content %}
+<h1 class="title pt-5">{{header}}</h1>
+<a class="button is-dark" href="{% url 'create_seaanimal' %}">Add Species</a>
+<div class="gallery">
+    {% for species in seaanimals %}
+    <a href="{% url 'seaanimal_detail' species.pk %}">
+        <div class="card">
+            <div class="card-image">
+                <figure class="image is-square">
+                    <img src="{{species.image}}" alt="{{species.name}}"/>
+                </figure>
+            </div>
+            <div class="card-header">
+                <p class="card-header-title">{{species.name}}</p>
+            </div>
+        </div>
+    </a>
+    <!-- if there are no items in the cephalopods array then this will execute -->
+    {% empty %}
+    <article class="message">
+        <div class="message-header">
+            <p>No Animals! :(</p>
+        </div>
+    </article>
+    <!-- rememeber you always need to explicitly close your for loops -->
+    {% endfor %}
+</div>
+{% endblock %}

@@ -17,5 +17,4 @@ urlpatterns = [
     path('seaanimal/<int:pk>/delete', views.AnimalDeleteConfirmation.as_view(), name="animal_delete"),
     path('seaanimal/<int:pk>/update', views.UpdateAnimal.as_view(), name="animal_update"),
     path('seaanimal/<int:pk>/speciesdelete', views.SpeciesDeleteConfirmation.as_view(), name="species_delete"),
-
 ]
